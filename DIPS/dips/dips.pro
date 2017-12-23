@@ -1,5 +1,9 @@
 QT += core
 QT -= gui
+QT += sql
+QT += network
+QT += serialport
+
 
 CONFIG += c++11
 
@@ -8,6 +12,9 @@ CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
+
+include(net/net.pri)
+include(pdu/pdu.pri)
 
 SOURCES += main.cpp
 
