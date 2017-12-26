@@ -1,11 +1,13 @@
 #include "initclass.h"
 #include "pdu/dev/pdudevspied.h"
 #include "net/analyze/netdataanalyze.h"
-
+#include "config/configfile.h"
 
 InitClass::InitClass()
 {
     initFunction();
+
+    ConfigFile con;
 }
 
 
