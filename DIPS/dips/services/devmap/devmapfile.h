@@ -1,5 +1,5 @@
-#ifndef CONFIGFILE_H
-#define CONFIGFILE_H
+#ifndef DEVMAPFILE_H
+#define DEVMAPFILE_H
 #include "common.h"
 
 struct sMapItem {
@@ -8,16 +8,15 @@ struct sMapItem {
 };
 typedef QMap<int, sMapItem> devRtuMap;
 
-
-class ConfigFile
+class DevMapFile
 {
 public:
-    ConfigFile();
+    DevMapFile();
 
     bool readJson(devRtuMap &map);
 
 protected:
-    bool writeJson(const QString &name);   
+    bool writeJson(const QString &name);
 };
 
-#endif // CONFIGFILE_H
+#endif // DEVMAPFILE_H

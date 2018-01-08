@@ -1,11 +1,10 @@
-#include "configfile.h"
+#include "devmapfile.h"
 
-#define CONFIG_FILE "config.json"
+#define DEV_CONFIG_FILE "devmap.json"
 
-
-ConfigFile::ConfigFile()
+DevMapFile::DevMapFile()
 {
-    QString fn = cm_pathOfData(CONFIG_FILE);
+    QString fn = cm_pathOfData(DEV_CONFIG_FILE);
     QFile file(fn);
     if(!file.exists()) {
         writeJson(fn);
@@ -13,7 +12,7 @@ ConfigFile::ConfigFile()
 }
 
 
-bool ConfigFile::writeJson(const QString &name)
+bool DevMapFile::writeJson(const QString &name)
 {
     QJsonArray array;
 
@@ -41,9 +40,9 @@ bool ConfigFile::writeJson(const QString &name)
     return ret;
 }
 
-bool ConfigFile::readJson(devRtuMap &map)
+bool DevMapFile::readJson(devRtuMap &map)
 {
-    QFile file(cm_pathOfData(CONFIG_FILE));
+    QFile file(cm_pathOfData(DEV_CONFIG_FILE));
     bool ret = file.open(QIODevice::ReadOnly);
     if(ret)
     {

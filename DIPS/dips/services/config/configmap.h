@@ -11,8 +11,8 @@ public:
 protected:
      bool readConfigFile();
 
-
-
+private:
+    devRtuMap mMap;
 };
 
 #endif // CONFIGMAP_H

@@ -2,13 +2,13 @@
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/config/configfile.h \
-    $$PWD/config/configmap.h
+    $$PWD/devmap/devmapfile.h \
+    $$PWD/devmap/devrtumap.h
    
 	
 SOURCES += \
-    $$PWD/config/configfile.cpp \
-    $$PWD/config/configmap.cpp
+    $$PWD/devmap/devmapfile.cpp \
+    $$PWD/devmap/devrtumap.cpp
     
 
 FORMS += \
