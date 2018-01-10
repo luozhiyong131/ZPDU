@@ -12,10 +12,12 @@ class PduDTName
 {
 public:
     PduDTName();
+    static PduDTName *bulid();
 
     int list(QList<int> &list);
     int defineList(QList<int> &list);
 
+    QString getName(int type);
     bool getName(int type, QString &name);
     int getNum(const QString &name);
 };

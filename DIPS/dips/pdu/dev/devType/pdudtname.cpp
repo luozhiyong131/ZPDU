@@ -14,6 +14,15 @@ PduDTName::PduDTName()
 
 }
 
+PduDTName *PduDTName::bulid()
+{
+    static PduDTName* sington = nullptr;
+    if(sington == nullptr)
+        sington = new PduDTName();
+    return sington;
+}
+
+
 /**
  * @brief Hash表中的设备列表
  */
@@ -70,6 +79,13 @@ bool PduDTName::getName(int type, QString &name)
     }
 
     return ret;
+}
+
+QString PduDTName::getName(int type)
+{
+    QString name;
+    bool ret = getName(type, name);
+    return name;
 }
 
 int PduDTName::getNum(const QString &name)
