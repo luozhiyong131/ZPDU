@@ -4,13 +4,15 @@ INCLUDEPATH += $$PWD
 
 
 HEADERS += \
-    $$PWD/devmap/devmapfile.h \
-    $$PWD/devmap/devrtumap.h
+    $$PWD/json/buildjson.h \
+    $$PWD/json/savejsonfile.h \
+    $$PWD/servicethread.h
    
 	
 SOURCES += \
-    $$PWD/devmap/devmapfile.cpp \
-    $$PWD/devmap/devrtumap.cpp
+    $$PWD/json/buildjson.cpp \
+    $$PWD/json/savejsonfile.cpp \
+    $$PWD/servicethread.cpp
     
 
 FORMS += \

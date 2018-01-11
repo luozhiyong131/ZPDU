@@ -72,7 +72,7 @@ bool PduDTName::getName(int type, QString &name)
         break;
 
     default:
-        qDebug() << "PDU Type err: %x" << type;
+        qDebug() << "PDU Type err: " << type;
         name = "Lzy";
         ret = false;
         break;

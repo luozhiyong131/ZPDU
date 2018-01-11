@@ -16,9 +16,7 @@ TEMPLATE = app
 include(net/net.pri)
 include(pdu/pdu.pri)
 include(common/common.pri)
-include(json/json.pri)
 include(services/services.pri)
-include(serialport/serialport.pri)
 
 SOURCES += main.cpp \
     initclass.cpp

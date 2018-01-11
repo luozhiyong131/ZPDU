@@ -58,6 +58,15 @@ bool PduOutputName::get(int output, QString &name) //获取输出位名称
     return ret;
 }
 
+QString PduOutputName::get(int output) //获取输出位名称
+{
+    QString name;
+    bool ret = get(output, name);
+    if(!ret) name = "Output " + QString::number(output+1);
+
+    return name;
+}
+
 /**
  * @brief 输出位数
  * @return

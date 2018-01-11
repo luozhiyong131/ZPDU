@@ -10,6 +10,7 @@ public:
 
     void set(int output,const QString &name);
     bool get(int output, QString &name); //获取输出位名称
+    QString get(int output);
     void setAll(const QString &name);
 
     int size(void); // 输出位的位数
