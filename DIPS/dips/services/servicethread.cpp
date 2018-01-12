@@ -2,8 +2,10 @@
 
 ServiceThread::ServiceThread(QObject *parent) : QThread(parent)
 {    
-     mBuildJson = BuildJson::bulid();
-     QTimer::singleShot(2*1000,this,SLOT(start()));
+    mBuildJson = BuildJson::bulid();
+    mWebSocket = new WebSocketClient(this);
+    QTimer::singleShot(20*1000,this,SLOT(start()));
+    readFile();
 }
 
 ServiceThread *ServiceThread::bulid()
@@ -20,9 +22,14 @@ ServiceThread::~ServiceThread()
     wait();
 }
 
-
-
-
+void ServiceThread::readFile()
+{
+    mSec = sys_configFile_readInt("timer", WEB_SOCKET);
+    if(mSec<=0) {
+        mSec = 5;
+        sys_configFile_writeParam("timer", QString::number(mSec), WEB_SOCKET);
+    }
+}
 
 void ServiceThread::readDevList()
 {
@@ -49,8 +56,9 @@ void ServiceThread::readDevList()
                     QJsonObject json;
                     bool ret = mBuildJson->getJson(data, json);
                     if(ret) {
-//                        mBuildJson->saveJson("test", json);
-//                        qDebug() << "AAAAAAAAAAA";
+                        ret = mWebSocket->sendMessage(json);
+                        // mBuildJson->saveJson("test", json);
+                        // qDebug() << "AAAAAAAAAAA";
                     }
                 }
 
@@ -66,6 +74,6 @@ void ServiceThread::run()
     isRun = true;
     while(isRun) {
         readDevList();
-        sleep(1);
+        sleep(mSec);
     }
 }

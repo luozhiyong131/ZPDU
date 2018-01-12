@@ -2,6 +2,7 @@
 #define SERVICETHREAD_H
 
 #include "json/buildjson.h"
+#include "websocket/websocketclient.h"
 
 class ServiceThread : public QThread
 {
@@ -13,12 +14,15 @@ public:
 
 protected:
     void run();
+    void readFile();
     void readDevList();
 
 protected slots:
 
 private:
     BuildJson *mBuildJson;
+    WebSocketClient *mWebSocket;
+    int mSec;
     bool isRun;
 };
 

@@ -3,6 +3,7 @@ QT -= gui
 QT += sql
 QT += network
 QT += serialport
+QT += websockets
 
 
 CONFIG += c++11
