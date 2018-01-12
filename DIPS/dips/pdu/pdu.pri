@@ -72,7 +72,8 @@ HEADERS += \
     $$PWD/dev/devAlarm/pdu_alarmdev.h \
     $$PWD/dev/devAlarm/pdu_alarmrecord.h \
     $$PWD/dev/devAlarm/pdu_clearflag.h \
-    $$PWD/dev/pdudevspied.h
+    $$PWD/dev/pdudevspied.h \
+    $$PWD/dev/devSetting/devsetting.h
     
 
 	
@@ -140,7 +141,8 @@ SOURCES += \
     $$PWD/dev/devAlarm/pdu_alarmdev.cpp \
     $$PWD/dev/devAlarm/pdu_alarmrecord.cpp \
     $$PWD/dev/devAlarm/pdu_clearflag.cpp \
-    $$PWD/dev/pdudevspied.cpp
+    $$PWD/dev/pdudevspied.cpp \
+    $$PWD/dev/devSetting/devsetting.cpp
     
 	
    
