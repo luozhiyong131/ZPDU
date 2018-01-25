@@ -78,7 +78,7 @@ void BuildJson::head(PduDataPacket *packet, QJsonObject &json)
     QString name = packet->info->type->name->get();
     obj.insert("dev_name", name);
 
-    json.insert("Head", QJsonValue(obj));
+    json.insert("head_info", QJsonValue(obj));
 }
 
 
@@ -127,8 +127,8 @@ void BuildJson::pduObjData(PduObjData *ObjData, int id, QJsonObject &obj)
 void BuildJson::pduLineData(PduObjData *ObjData, QJsonObject &json, int mode)
 {
     QJsonArray jsonArray;
-    QString modeStr = "Line";
-    if(mode) modeStr = "Loop";
+    QString modeStr = "line";
+    if(mode) modeStr = "loop";
 
     int num = ObjData->vol->value->size();
     for(int i=0; i<num; ++i)
@@ -141,7 +141,7 @@ void BuildJson::pduLineData(PduObjData *ObjData, QJsonObject &json, int mode)
         jsonArray.append(subObj);
     }
 
-    if(num > 0) json.insert(QString("%1_list").arg(modeStr), QJsonValue(jsonArray));
+    if(num > 0) json.insert(QString("%1_item_list").arg(modeStr), QJsonValue(jsonArray));
 }
 
 void BuildJson::pduOutputData(PduObjData *ObjData, PduOutput *output, QJsonObject &json)
@@ -160,7 +160,7 @@ void BuildJson::pduOutputData(PduObjData *ObjData, PduOutput *output, QJsonObjec
         jsonArray.append(subObj);
     }
 
-    if(num > 0) json.insert("output_list", QJsonValue(jsonArray));
+    if(num > 0) json.insert("output_item_list", QJsonValue(jsonArray));
 }
 
 void BuildJson::pduThData(PduDataUnit *unit, QJsonObject &json, int mode)
@@ -180,7 +180,7 @@ void BuildJson::pduThData(PduDataUnit *unit, QJsonObject &json, int mode)
         jsonArray.append(subObj);
     }
 
-    if(num > 0) json.insert(QString("%1_list").arg(modeStr), QJsonValue(jsonArray));
+    if(num > 0) json.insert(QString("%1_item_list").arg(modeStr), QJsonValue(jsonArray));
 }
 
 void BuildJson::pduEnvItemData(PduDataBase *data, QJsonObject &json, int mode)
@@ -221,16 +221,24 @@ void BuildJson::pduEnvData(PduEnvData *env, QJsonObject &obj)
     pduEnvItemData(env->water, json, fn++);
     pduEnvItemData(env->smoke, json, fn++);
 
-    obj.insert("env", QJsonValue(json));
+    for(int i=0; i<2; ++i)
+        obj.insert("segment"+QString::number(i+1), "");
+    obj.insert("env_info", QJsonValue(json));
 }
 
 void BuildJson::pduDevData(PduDataPacket *packet, QJsonObject &obj)
 {   
+    obj.insert("company", "CLEVER");
+    obj.insert("version", 1);
+
     PduDevData *devData = packet->data;
     pduLineData(devData->line, obj, 0);
     pduLineData(devData->loop, obj, 1);
     pduOutputData(devData->output, packet->output, obj);
     pduEnvData(devData->env, obj);
+
+    for(int i=0; i<6; ++i)
+        obj.insert("segment"+QString::number(i+1), "");
 }
 
 
