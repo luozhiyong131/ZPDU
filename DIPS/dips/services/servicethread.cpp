@@ -57,8 +57,8 @@ void ServiceThread::readDevList()
                     bool ret = mBuildJson->getJson(data, json);
                     if(ret) {
                         ret = mWebSocket->sendMessage(json);
-                         mBuildJson->saveJson("test", json);
-                         qDebug() << "AAAAAAAAAAA";
+//                         mBuildJson->saveJson("test", json);
+//                         qDebug() << "AAAAAAAAAAA";
                     }
                 }
 
