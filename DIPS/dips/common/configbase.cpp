@@ -1,5 +1,5 @@
 /*
- * 配置文件公共基类
+ * 配置文件公共类
  *
  *  Created on: 2018年1月1日
  *      Author: Lzy
@@ -8,53 +8,41 @@
 
 ConfigBase::ConfigBase()
 {
-
+    initFun();
 }
 
-
-/**
- * @brief 获取串口名称
- * @return 串口名
- */
-QString ConfigBase::getSerialName()
+void ConfigBase::initFun()
 {
-    QString prefix = getPrefix();
-    QString str = QString("%1_COM").arg(prefix);
-    return sys_configFile_readStr(str, prefix);
+    mUploadMode = readfile("UploadMode", 1);
+    mDownMode = readfile("DownMode", 1);
+    mSetCmd = readfile("SetCmd", 0);
 }
 
-/**
- * @brief 设置串口名
- * @param name
- */
-void ConfigBase::setSerialName(const QString &name)
+int ConfigBase::readfile(const QString &str, int deValue)
 {
     QString prefix = getPrefix();
-    QString str = QString("%1_COM").arg(prefix);
-    sys_configFile_writeParam(str, name, prefix);
+    QString string = QString("%1_%2").arg(prefix).arg(str);
+    int value =  sys_configFile_readInt(string, prefix);
+    if(value < 0) {
+        value = deValue;
+        sys_configFile_writeParam(string, QString::number(value), prefix);
+    }
+    return value;
 }
 
-/**
- * @brief 获取相数
- * @return
- */
-QString ConfigBase::getBaudRate()
+void ConfigBase::cmdSetClear()
 {
     QString prefix = getPrefix();
-    QString str = QString("%1_baud_rate").arg(prefix);
-    str = sys_configFile_readStr(str, prefix);
-    if(str.isEmpty())  str = "9600";
-    return str;
+    QString string = QString("%1_SetCmd").arg(prefix);
+    int value = mSetCmd = 0;
+    sys_configFile_writeParam(string, QString::number(value), prefix);
 }
 
-/**
- * @brief 设置相数
- * @param num
- */
-void ConfigBase::setBaudRate(const QString &rate)
+ConfigBase *ConfigBase::bulid()
 {
-    QString prefix = getPrefix();
-    QString str = QString("%1_baud_rate").arg(prefix);
-    sys_configFile_writeParam(str, rate, prefix);
+    static ConfigBase* sington = nullptr;
+    if(sington == nullptr)
+        sington = new ConfigBase();
+    return sington;
 }
 

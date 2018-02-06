@@ -1,7 +1,7 @@
 ﻿#ifndef COMMON_H
 #define COMMON_H
 #include <QtCore>
-#include "sysconfigfile.h"
+#include "configbase.h"
 
 
 // 倍率定义
