@@ -1,6 +1,7 @@
 #include "websocketclient.h"
 #include "common.h"
 #include "pdu/dev/devSetting/devsetting.h"
+#include "services/setpduthread.h"
 
 
 WebSocketClient::WebSocketClient(QObject *parent) : QObject(parent)
@@ -12,6 +13,8 @@ WebSocketClient::WebSocketClient(QObject *parent) : QObject(parent)
     QObject::connect(mSocket, SIGNAL(connected()), this, SLOT(connected()));
     QObject::connect(mSocket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     QObject::connect(mSocket, SIGNAL(textMessageReceived(const QString &message)), this, SLOT(textMessageReceived(const QString &message)));
+
+    SetPduThread::bulid();  //初始化
 }
 
 void WebSocketClient::open(const QUrl &url)
@@ -64,21 +67,20 @@ void WebSocketClient::disconnected()
 
 void WebSocketClient::textMessageReceived(const QString &message)
 {
+    SetPduThread::bulid()->addList(message);
+//    net_dev_data pkt;
 
+//    pkt.addr = 0;
+//    pkt.fn[0] = 7; // 设备用户信息
+//    pkt.fn[1] = 0x80; // SNMP
+//    pkt.fn[1] += 0;
 
-    net_dev_data pkt;
+//    pkt.data = (uchar *)"lzy";
+//    pkt.len = 3;
 
-    pkt.addr = 0;
-    pkt.fn[0] = 7; // 设备用户信息
-    pkt.fn[1] = 0x80; // SNMP
-    pkt.fn[1] += 0;
+//    DevSetting::bulid()->sentData(pkt, "ZPDU"); //
 
-    pkt.data = (uchar *)"lzy";
-    pkt.len = 3;
-
-    DevSetting::bulid()->sentData(pkt, "ZPDU"); //
-
-    DevSetting::bulid()->sentData("192.168.1.55", pkt, "ZPDU");
+//    DevSetting::bulid()->sentData("192.168.1.55", pkt, "ZPDU");
 
 }
 

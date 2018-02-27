@@ -13,6 +13,7 @@ CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
+DESTDIR = $$PWD/../bin
 
 include(net/net.pri)
 include(pdu/pdu.pri)
