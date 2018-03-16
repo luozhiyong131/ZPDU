@@ -93,7 +93,6 @@ void SetPduThread::run()
         QByteArray array;
         readFile(array);
         addList(QString(array));
-
         //----------------------------
         if(m_memoryList.size() > 0){
             lock.lockForRead(); //读锁
