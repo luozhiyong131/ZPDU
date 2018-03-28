@@ -20,6 +20,7 @@ include(pdu/pdu.pri)
 include(common/common.pri)
 include(services/services.pri)
 include(zebra/zebra.pri)
+include(autoaddfriend/autoaddfriend.pri)
 
 SOURCES += main.cpp
 
@@ -37,5 +38,5 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS +=
 
 
-#DEFINES += ZEBRA_MODULE
+DEFINES += ZEBRA_MODULE
 
