@@ -8,7 +8,7 @@ zebraSecurityTable* zebraSecurityTable::m_table_instance = nullptr;
 
 const quint16 ZEBRA_SECURITY_SERVER_PORT = 21011;
 const uint32_t ZEBRA_SECURITY_MAX_NUM = 200;
-const uint32_t ZEBRA_SECURITY_TIME = 30*1000;
+const int32_t ZEBRA_SECURITY_TIME = 30*1000;
 
 
 
@@ -46,7 +46,7 @@ void zebraSecurityTable::on_timeout_process()
     for(it = m_zebra_security_map.begin(); it != m_zebra_security_map.end(); it++)
     {
 
-        if(it->second.beat_beriod < -(ZEBRA_SECURITY_TIME/1000))
+        if(it->second.beat_beriod < -(ZEBRA_SECURITY_TIME/1000)*3)
         {
             //nothing to do
             //此处不减，防止无限减导致溢出
@@ -66,16 +66,32 @@ void zebraSecurityTable::on_timeout_process()
 int zebraSecurityTable::add_one_zebra_security(char *data_str)
 {
     zebra_security_info* data_info = (zebra_security_info*)data_str;
-    QString device_mac = QString(QLatin1String(data_info->dev_mac));
+    uint32_t mac_1_c = (uchar)data_info->dev_mac[0];
+    uint32_t mac_2_c = (uchar)data_info->dev_mac[1];
+    uint32_t mac_3_c = (uchar)data_info->dev_mac[2];
+    uint32_t mac_4_c = (uchar)data_info->dev_mac[3];
+    uint32_t mac_5_c = (uchar)data_info->dev_mac[4];
+    uint32_t mac_6_c = (uchar)data_info->dev_mac[5];
+    uint32_t mac_7_c = (uchar)data_info->dev_mac[6];
+    uint32_t mac_8_c = (uchar)data_info->dev_mac[7];
+    QString device_mac = QString::number(mac_1_c, 16) + "-" +
+                         QString::number(mac_2_c, 16) + "-" +
+                         QString::number(mac_3_c, 16) + "-" +
+                         QString::number(mac_4_c, 16) + "-" +
+                         QString::number(mac_5_c, 16) + "-" +
+                         QString::number(mac_6_c, 16) + "-" +
+                         QString::number(mac_7_c, 16) + "-" +
+                         QString::number(mac_8_c, 16);
 
     QMutexLocker locker(&m_mutex);
 
     std::map<QString, zebra_security_data>::iterator it = m_zebra_security_map.find(device_mac);
     if(it != m_zebra_security_map.end())
     {
-        /*MY_DEBUG(1, RED) << "add -"
+        /*MY_DEBUG(1, RED) << "update"
                          << " beat_beriod = " << it->second.beat_beriod
                          << " dev_ip = " << it->second.dev_ip.toStdString()
+                         << " dev_mac = " << device_mac.toStdString()
                          << DEBUG_END;*/
         it->second.beat_beriod = data_info->beat_beriod;
 
@@ -275,7 +291,7 @@ void zebraSecurityManager::new_connect()
     zebraSecuritySocket *sock_thread = nullptr;
     QMutexLocker locker(&m_mutex);
 
-    MY_DEBUG(1, RED) << "befor use m_semaphore have = " << m_semaphore.available() << DEBUG_END;
+    //MY_DEBUG(1, RED) << "befor use m_semaphore have = " << m_semaphore.available() << DEBUG_END;
 
     m_semaphore.acquire();
     sock_thread = m_sock_stroage.takeLast();
@@ -295,7 +311,7 @@ void zebraSecurityManager::recycleThread()
         m_sock_stroage.append(sock_thread);
         m_semaphore.release();
 
-        MY_DEBUG(1, RED) << "after insert m_semaphore have = " << m_semaphore.available() << DEBUG_END;
+        //MY_DEBUG(1, RED) << "after insert m_semaphore have = " << m_semaphore.available() << DEBUG_END;
     }
 }
 
