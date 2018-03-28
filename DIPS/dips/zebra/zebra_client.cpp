@@ -147,7 +147,6 @@ void zebra_client::check_network_state()
         {
             is_data_process_run = true;
             zebra_process_thread_stroage::get_intance();
-            AutoAddFriend::get_instance()->addFriend("192.168.128.163");
         }
     }
 }
