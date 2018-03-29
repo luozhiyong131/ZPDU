@@ -8,7 +8,7 @@
 #include "netpackdata.h"
 
 #ifdef ZEBRA_MODULE
-#include <winsock2.h>
+//#include <winsock2.h>
 #include "zebra/zebra_client.h"
 #endif
 
