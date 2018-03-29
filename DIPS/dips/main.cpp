@@ -1,7 +1,10 @@
-#include <QCoreApplication>
+﻿#include <QCoreApplication>
 #include "pdu/dev/pdudevspied.h"
 #include "net/analyze/netdataanalyze.h"
 #include "servicethread.h"
+#include "zebra/common_debug.h"
+#include "zebra/zebra_client.h"
+#include "autoaddfriend/auto_get_zebra_server_ip.h"
 
 
 void initFunction()
@@ -10,6 +13,11 @@ void initFunction()
     new NetDataAnalyze();
     new PduDevSpied(); // 设备掉线处理
     new ServiceThread();
+#ifdef ZEBRA_MODULE
+    MY_DEBUG(1, LIGHT_PURPLE) << "hello zebra" << DEBUG_END;
+    zebra_client::get_instance()->init();
+    AutoGetServer::get_instance();
+#endif
 }
 
 int main(int argc, char *argv[])

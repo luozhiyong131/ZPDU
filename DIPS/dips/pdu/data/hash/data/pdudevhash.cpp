@@ -8,6 +8,11 @@
  */
 #include "pdudevhash.h"
 
+#if defined(ZEBRA_MODULE)
+#include "pdu/dev/devType/pdudtname.h"
+#include "autoaddfriend/autoaddfriend.h"
+#endif
+
 PduDevHash::PduDevHash()
 {
     mPacket = NULL;
@@ -94,7 +99,18 @@ PduDataPacket *PduDevHash::get(int num)
     else
         isNew = false;
 
-   return getPacket(num);
+#if defined(ZEBRA_MODULE)
+    PduDataPacket* dev_data_tmp = getPacket(num);
+    if(nullptr != dev_data_tmp)
+    {
+        if(PDU_TYPE_ZPDU == dev_data_tmp->devType)
+        {
+            AutoAddFriend::get_instance()->addFriend(dev_data_tmp->ip->get());
+        }
+    }
+#endif
+
+    return getPacket(num);
 }
 
 
