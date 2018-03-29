@@ -37,3 +37,14 @@ Makefile*
 CMakeLists.txt.user*
 
 *.exe
+
+
+*.lib
+*.exe
+DIPS/dips/zebra/lib/x32/release/peersafe/protoc.exe
+*.exp
+*.ilk
+*.pdb
+DIPS/dips/zebra/lib/x32/debug/peersafe/copylib.bat
+*.rar
+*.tar.gz
