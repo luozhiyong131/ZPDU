@@ -155,7 +155,6 @@ zebraSecuritySocket::zebraSecuritySocket(QObject *parent)
 
 zebraSecuritySocket::~zebraSecuritySocket()
 {
-    requestInterruption();
     wait();
     quit();
 }
@@ -240,7 +239,6 @@ void zebraSecuritySocket::reply_zebra_security()
 void zebraSecuritySocket::finish_zebra_security_thread()
 {
     m_tcp_socket->deleteLater();
-    requestInterruption();
     quit();
 }
 
