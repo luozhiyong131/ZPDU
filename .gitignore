@@ -38,9 +38,7 @@ CMakeLists.txt.user*
 
 *.exe
 
-
 *.lib
-*.exe
 DIPS/dips/zebra/lib/x32/release/peersafe/protoc.exe
 *.exp
 *.ilk
