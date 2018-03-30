@@ -7,6 +7,7 @@
 #include <QSemaphore>
 #include <QThread>
 #include <QTimer>
+#include <QMutex>
 
 #include <stdint.h>
 

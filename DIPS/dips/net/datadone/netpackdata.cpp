@@ -8,9 +8,15 @@
 #include "netpackdata.h"
 
 #ifdef ZEBRA_MODULE
-//#include <winsock2.h>
 #include "zebra/zebra_client.h"
+#if defined(Q_OS_WIN32)
+#include <winsock2.h>
+#elif defined(Q_OS_LINUX)
+#include <netinet/in.h>
 #endif
+#endif
+
+
 
 /**
  * 功  能：数据加入包头、结束符
