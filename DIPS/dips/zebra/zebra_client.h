@@ -8,6 +8,7 @@
 #include <set>
 #include <QByteArray>
 #include <stdint.h>
+#include <QMutex>
 
 #include "peersafe/imapi/im.h"
 #include "maidsafe/common/active.h"

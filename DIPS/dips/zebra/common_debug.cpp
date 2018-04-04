@@ -4,6 +4,7 @@
 #include <windows.h>
 #else
 #include <time.h>
+#include <sys/time.h>
 #endif
 
 int64_t get_system_time_micros()

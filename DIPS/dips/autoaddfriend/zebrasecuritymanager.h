@@ -7,6 +7,7 @@
 #include <QSemaphore>
 #include <QThread>
 #include <QTimer>
+#include <QMutex>
 
 #include <stdint.h>
 
@@ -55,6 +56,7 @@ public:
     zebraSecuritySocket(QObject *parent=nullptr);
     ~zebraSecuritySocket();
     void init(QTcpSocket *socket = nullptr);
+    void finish_zebra_security_thread();
 
 protected:
     void run();
@@ -65,7 +67,7 @@ signals:
 private slots:
     void readMessage();
     void reply_zebra_security();
-    void finish_zebra_security_thread();
+
 
 private:
     bool finish_flag;
