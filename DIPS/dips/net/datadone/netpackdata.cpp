@@ -9,13 +9,13 @@
 
 #ifdef ZEBRA_MODULE
 #include "zebra/zebra_client.h"
+
 #if defined(Q_OS_WIN32)
 #include <winsock2.h>
 #elif defined(Q_OS_LINUX)
 #include <netinet/in.h>
 #endif
 #endif
-
 
 
 /**

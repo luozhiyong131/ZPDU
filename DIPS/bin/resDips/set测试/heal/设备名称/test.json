@@ -1,0 +1,21 @@
+{
+    "company": "CLEVER",
+    "enable": 1,
+    "head_info": {
+        "dev_name": "ZPDU2",
+        "dev_num": 0,
+        "dev_spec": 4,
+        "dev_type": "ZPDU",
+        "ip": "192.168.16.163"
+    },
+    "segment1": "",
+    "segment2": "",
+    "segment3": "",
+    "segment4": "",
+    "segment5": "",
+    "segment6": "",
+    "version": 1
+}
+
+
+
