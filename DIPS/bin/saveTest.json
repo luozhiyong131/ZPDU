@@ -1,0 +1,234 @@
+{
+    "company": "CLEVER",
+    "env_info": {
+        "door_list": [
+            {
+                "id": 1,
+                "name": "door 1",
+                "value": 0
+            },
+            {
+                "id": 2,
+                "name": "door 2",
+                "value": 0
+            }
+        ],
+        "hum_item_list": [
+            {
+                "hum_alarm": 0,
+                "hum_critical_alarm": 0,
+                "hum_critical_max": 60,
+                "hum_critical_min": 0,
+                "hum_max": 33,
+                "hum_min": 0,
+                "hum_value": 0,
+                "id": 1,
+                "name": "hum 1"
+            },
+            {
+                "hum_alarm": 0,
+                "hum_critical_alarm": 0,
+                "hum_critical_max": 60,
+                "hum_critical_min": 0,
+                "hum_max": 40,
+                "hum_min": 0,
+                "hum_value": 0,
+                "id": 2,
+                "name": "hum 2"
+            }
+        ],
+        "smoke_list": [
+            {
+                "id": 1,
+                "name": "smoke 1",
+                "value": 0
+            }
+        ],
+        "tem_item_list": [
+            {
+                "id": 1,
+                "name": "tem 1",
+                "tem_alarm": 0,
+                "tem_critical_alarm": 0,
+                "tem_critical_max": 30,
+                "tem_critical_min": 0,
+                "tem_max": 40,
+                "tem_min": 0,
+                "tem_value": 0
+            },
+            {
+                "id": 2,
+                "name": "tem 2",
+                "tem_alarm": 0,
+                "tem_critical_alarm": 0,
+                "tem_critical_max": 30,
+                "tem_critical_min": 0,
+                "tem_max": 40,
+                "tem_min": 0,
+                "tem_value": 0
+            }
+        ],
+        "water_list": [
+            {
+                "id": 1,
+                "name": "water 1",
+                "value": 0
+            }
+        ]
+    },
+    "head_info": {
+        "dev_name": "ZPDU1",
+        "dev_num": 0,
+        "dev_spec": 4,
+        "dev_type": "ZPDU",
+        "ip": "192.168.1.193"
+    },
+    "ip_addr": {
+        "dns": "192.168.1.1",
+        "gw": "192.168.1.1",
+        "ip": "192.168.16.1",
+        "mask": "192.168.1.193",
+        "mode": 1
+    },
+    "line_item_list": [
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 1,
+            "name": "line 1",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        },
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 2,
+            "name": "line 2",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        },
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 3,
+            "name": "line 3",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        },
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 4,
+            "name": "line 4",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        },
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 5,
+            "name": "line 5",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        },
+        {
+            "PF": 0,
+            "cur_alarm": 0,
+            "cur_critical_alarm": 0,
+            "cur_critical_max": 11,
+            "cur_critical_min": 0,
+            "cur_max": 12,
+            "cur_min": 0,
+            "cur_value": 0,
+            "ele": 0,
+            "id": 6,
+            "name": "line 6",
+            "pow": 0,
+            "switch": 2,
+            "vol_alarm": 0.1,
+            "vol_critical_alarm": 0.1,
+            "vol_critical_max": 276,
+            "vol_critical_min": 170,
+            "vol_max": 276,
+            "vol_min": 170,
+            "vol_value": 0
+        }
+    ],
+    "segment1": "",
+    "segment2": "",
+    "segment3": "",
+    "segment4": "",
+    "segment5": "",
+    "segment6": "",
+    "version": 1
+}

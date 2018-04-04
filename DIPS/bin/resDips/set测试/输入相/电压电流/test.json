@@ -1,0 +1,42 @@
+{
+    "company": "CLEVER",
+    "enable": 1,
+    "head_info": {
+        "dev_num": 0,
+        "dev_spec": 4,
+        "dev_type": "ZPDU",
+        "ip": "192.168.16.163"
+    },
+    "line_item_list": [
+        {
+            "id": 1,
+
+            "cur_critical_max": 12,
+            "cur_critical_min": 0,
+            "cur_max": 13,
+            "cur_min": 0, 
+
+            "vol_critical_max": 244,
+            "vol_critical_min": 0,
+            "vol_max": 244,
+            "vol_min": 1.2
+
+
+           
+        }
+    ],
+    "segment1": "",
+    "segment2": "",
+    "segment3": "",
+    "segment4": "",
+    "segment5": "",
+    "segment6": "",
+
+
+ 
+
+    "version": 1
+}
+
+
+
