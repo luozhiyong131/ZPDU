@@ -17,7 +17,7 @@
 #include "common_debug.h"
 #include "zebra/zebrdatasql.h"
 #include "autoaddfriend/autoaddfriend.h"
-
+#include "autoaddfriend/auto_get_zebra_server_ip.h"
 
 extern peersafe::im::Message_client &im;
 extern peersafe::im::Message_client *_im;
@@ -123,6 +123,7 @@ void zebra_client::check_network_state()
     if(network_state < 4)
     {
         MY_DEBUG(1, GREEN) << "network_state = " << network_state << DEBUG_END;
+        AutoGetServer::get_instance()->finish_flag = false;
     }
 
     zebra_network_state = network_state;

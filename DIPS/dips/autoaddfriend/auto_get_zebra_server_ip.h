@@ -26,6 +26,8 @@ class AutoGetServer : public QObject
     Q_OBJECT
 
 public:
+    bool finish_flag;
+
     explicit AutoGetServer(QObject *parent = 0);
     ~AutoGetServer();
     static AutoGetServer* get_instance();
@@ -34,7 +36,7 @@ public slots:
     void readMessageSlot();
 
 protected:
-    bool finish_flag;
+
     static AutoGetServer* m_auto_get_server;
     QUdpSocket udpSocket;
 

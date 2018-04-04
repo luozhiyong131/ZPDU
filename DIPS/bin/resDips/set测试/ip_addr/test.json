@@ -1,0 +1,27 @@
+{
+    "company": "CLEVER",
+    "enable": 1,
+    "head_info": {
+        "dev_num": 0,
+        "dev_spec": 4,
+        "dev_type": "ZPDU",
+        "ip": "192.168.16.255"
+    },
+    "ip_addr": {
+        "mask": "192.168.16.2",
+        "dns": "192.168.16.2",
+        "gw": "255.255.255.0",
+        "ip": "192.168.16.233",
+        "mode": 1
+    },
+    "segment1": "",
+    "segment2": "",
+    "segment3": "",
+    "segment4": "",
+    "segment5": "",
+    "segment6": "",
+    "version": 1
+}
+
+
+

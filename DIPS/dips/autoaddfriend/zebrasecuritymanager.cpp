@@ -155,8 +155,12 @@ zebraSecuritySocket::zebraSecuritySocket(QObject *parent)
 
 zebraSecuritySocket::~zebraSecuritySocket()
 {
-    wait();
-    quit();
+    if(this->isRunning())
+    {
+        requestInterruption();
+        wait();
+        quit();
+    }
 }
 
 void zebraSecuritySocket::init(QTcpSocket *socket)
@@ -173,11 +177,6 @@ void zebraSecuritySocket::init(QTcpSocket *socket)
             SIGNAL(readyRead()),
             this,
             SLOT(readMessage()));
-
-    connect(m_tcp_socket,
-            SIGNAL(disconnected()),
-            this,
-            SLOT(finish_zebra_security_thread()));
 
     connect(this,
             SIGNAL(reply_zebra_security_sig()),
@@ -239,7 +238,6 @@ void zebraSecuritySocket::reply_zebra_security()
 void zebraSecuritySocket::finish_zebra_security_thread()
 {
     m_tcp_socket->deleteLater();
-    quit();
 }
 
 
@@ -306,6 +304,7 @@ void zebraSecurityManager::recycleThread()
     if(sock_thread)
     {
         QMutexLocker locker(&m_mutex);
+        sock_thread->finish_zebra_security_thread();
         m_sock_stroage.append(sock_thread);
         m_semaphore.release();
 
