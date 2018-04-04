@@ -1,6 +1,11 @@
 #include "devsetting.h"
 #include "netpackdata.h"
 #include "dev/devType/pdudtname.h"
+#include "common.h"
+
+#ifdef ZEBRA_MODULE
+#include "zebra/zebra_client.h"
+#endif
 
 DevSetting::DevSetting()
 {
@@ -33,11 +38,23 @@ void DevSetting::sentData(net_dev_data &pkt)
     sentData(pkt, PDU_TYPE_ZPDU);
 }
 
-
 void DevSetting::sentData(const QString &ip, net_dev_data &pkt, int devType)
 {
     int len = net_data_packets(devType, TRA_TYPR_UDP, &pkt, m_buf);
-    udp_sent_data(ip, m_buf, len);
+
+#ifdef ZEBRA_MODULE
+    if(ConfigBase::bulid()->getDownMode() == PDU_Down_TCP){ //TCP
+        udp_sent_data(ip, m_buf, len);
+    }else if(ConfigBase::bulid()->getDownMode() == PDU_Down_Zebra){ //Zebar
+        zebra_client::get_instance()->send_new_protocol_data(ip, m_buf, len);
+    }else if(ConfigBase::bulid()->getDownMode() == PDU_Down_TcpZebra){ //双因子
+        udp_sent_data(ip, m_buf, len);
+        zebra_client::get_instance()->send_new_protocol_data(ip, m_buf, len);
+    }
+#else
+     udp_sent_data(ip, m_buf, len);
+#endif
+
 }
 
 void DevSetting::sentData(const QString &ip, net_dev_data &pkt, const QString & devTypeName)

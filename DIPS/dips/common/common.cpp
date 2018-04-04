@@ -6,10 +6,7 @@
  *      Author: Lzy
  */
 #include "common.h"
-
 #include <time.h>
-
-
 
 /***
   * 获取程序数据目录
