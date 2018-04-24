@@ -271,14 +271,6 @@ private:
 #define ZPDU_DOOR_SENSOR_MAX_NUM 2
 #define ZPDU_LINE_MAX_NUM        6
 
-#define COM_RATE_VOL	10.0    // 电压
-#define COM_RATE_CUR	10.0    // 电流
-#define COM_RATE_POW	1000.0  // 功率
-#define COM_RATE_ELE	10.0    // 电能
-#define COM_RATE_PF		10.0    // 功率因素
-#define COM_RATE_TEM	10.0    // 温度
-#define COM_RATE_HUM	10.0    // 湿度
-
 /* 结构体数据顺序为PDU传送数据的协议格式
  * 注意：如有改动，请与ZPDU配套修改
  */
@@ -330,7 +322,28 @@ typedef struct pdu_trap_data
     int  kwh[24];
     int  swicth[24];			//单个输出位开关状态
     char outputname[24][32];	//单个输出位名称
-
+    unsigned char warnflag[42+8+12+4 +2+1+1 +2];  //告警标识 分电流+组电流+总电参+温湿度+门禁+烟雾+水浸 +对齐补位
+    unsigned char alarmflag[42+8+12+4 +2];  //预警标识 分电流+组电流+总电参+温湿度 +对齐补位
+    //network para
+    char dev_ip[16];
+    char dev_mask[16];
+    char dev_gw[16];
+    char dev_dns[16];
+    int  dhcp;
+    //snmp para
+    char snmp_local_permis[16];
+    char snmp_net_permis[16];
+    char snmp_trap_ip1[16];
+    char snmp_trap_ip2[16];
+    //stmp
+    char stmp_user[16];
+    char stmp_pwd[16];
+    char stmp_server[16];
+    char stmp_email[64];
+    int  stmp_port;
+    //wen login
+    char web_user[32];
+    char web_pwe[16];
 }pdudata;
 
 /* 类介绍：
@@ -395,6 +408,14 @@ public:
     int get_pdu_output_electric_energy();
     int get_pdu_output_switch_state();
     int get_pdu_output_name();
+
+    int get_total_warn_alarm_flag();
+    int get_warn_alarm_flag();
+
+    int get_device_net_info();
+    int get_snmp_info();
+    int get_stmp_info();
+    int get_login_info();
 
 private:
     pdudata m_pdu_data;

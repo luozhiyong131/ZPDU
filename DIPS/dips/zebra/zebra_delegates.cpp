@@ -546,6 +546,14 @@ int analyze_pdu_trap_data::get_all_data(QString ip, int slave_num)
     get_pdu_output_switch_state();
     get_pdu_output_name();
 
+    get_total_warn_alarm_flag();
+    get_warn_alarm_flag();
+
+    get_device_net_info();
+    get_snmp_info();
+    get_stmp_info();
+    get_login_info();
+
     m_packet->offLine = PDU_OFF_LINE_TIME*3;
     //SignalDispatch::get()->dispatch(m_packet);
 
@@ -689,7 +697,7 @@ int analyze_pdu_trap_data::get_pdu_max_temperature()
     int i = 0;
     for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->tem->max->set(i, (m_pdu_data.maxT[i])*COM_RATE_TEM);
+        m_packet->data->env->tem->max->set(i, (m_pdu_data.maxT[i]));
 
         /*MY_DEBUG(1, GREEN) << "temperature : " << i
                            << " max : " <<  m_pdu_data.maxT[i]
@@ -709,7 +717,7 @@ int analyze_pdu_trap_data::get_pdu_min_temperature()
     int i = 0;
     for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->tem->min->set(i, (m_pdu_data.minT[i])*COM_RATE_TEM);
+        m_packet->data->env->tem->min->set(i, (m_pdu_data.minT[i]));
 
         /*MY_DEBUG(1, GREEN) << "temperature : " << i
                            << " min : " <<  m_pdu_data.minT[i]
@@ -729,7 +737,7 @@ int analyze_pdu_trap_data::get_pdu_cur_temperature()
     int i = 0;
     for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->tem->value->set(i, (m_pdu_data.temp[i])*COM_RATE_TEM);
+        m_packet->data->env->tem->value->set(i, (m_pdu_data.temp[i]));
 
         /*MY_DEBUG(1, GREEN) << "temperature : " << i
                            << " cur : " <<  m_pdu_data.temp[i]
@@ -749,7 +757,7 @@ int analyze_pdu_trap_data::get_pdu_up_critical_temperature()
     int i = 0;
     for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->tem->crMax->set(i, (m_pdu_data.ucritT[i])*COM_RATE_TEM);
+        m_packet->data->env->tem->crMax->set(i, (m_pdu_data.ucritT[i]));
 
         /*MY_DEBUG(1, GREEN) << "temperature : " << i
                            << " up critical : " <<  m_pdu_data.ucritT[i]
@@ -769,7 +777,7 @@ int analyze_pdu_trap_data::get_pdu_down_critical_temperature()
     int i = 0;
     for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->tem->crMin->set(i, (m_pdu_data.dcritT[i])*COM_RATE_TEM);
+        m_packet->data->env->tem->crMin->set(i, (m_pdu_data.dcritT[i]));
 
         /*MY_DEBUG(1, GREEN) << "temperature : " << i
                            << " down critical : " <<  m_pdu_data.dcritT[i]
@@ -789,7 +797,7 @@ int analyze_pdu_trap_data::get_pdu_max_hunidity()
     int i = 0;
     for(i = 0; i < ZPDU_HUMI_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->hum->max->set(i, (m_pdu_data.maxH[i])*COM_RATE_HUM);
+        m_packet->data->env->hum->max->set(i, (m_pdu_data.maxH[i]));
 
         /*MY_DEBUG(1, GREEN) << "hunidity : " << i
                            << " max : " <<  m_pdu_data.maxH[i]
@@ -809,7 +817,7 @@ int analyze_pdu_trap_data::get_pdu_min_hunidity()
     int i = 0;
     for(i = 0; i < ZPDU_HUMI_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->hum->min->set(i, (m_pdu_data.minH[i])*COM_RATE_HUM);
+        m_packet->data->env->hum->min->set(i, (m_pdu_data.minH[i]));
 
         /*MY_DEBUG(1, GREEN) << "hunidity : " << i
                            << " min : " <<  m_pdu_data.minH[i]
@@ -829,7 +837,7 @@ int analyze_pdu_trap_data::get_pdu_cur_hunidity()
     int i = 0;
     for(i = 0; i < ZPDU_HUMI_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->hum->value->set(i, (m_pdu_data.hum[i])*COM_RATE_HUM);
+        m_packet->data->env->hum->value->set(i, (m_pdu_data.hum[i]));
 
         /*MY_DEBUG(1, GREEN) << "hunidity : " << i
                            << " cur : " <<  m_pdu_data.hum[i]
@@ -849,7 +857,7 @@ int analyze_pdu_trap_data::get_pdu_up_critical_hunidity()
     int i = 0;
     for(i = 0; i < ZPDU_HUMI_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->hum->crMax->set(i, (m_pdu_data.ucritH[i])*COM_RATE_HUM);
+        m_packet->data->env->hum->crMax->set(i, (m_pdu_data.ucritH[i]));
 
         /*MY_DEBUG(1, GREEN) << "hunidity : " << i
                            << " up critical : " <<  m_pdu_data.ucritH[i]
@@ -869,7 +877,7 @@ int analyze_pdu_trap_data::get_pdu_down_critical_hunidity()
     int i = 0;
     for(i = 0; i < ZPDU_HUMI_SENSOR_MAX_NUM; i++)
     {
-        m_packet->data->env->hum->crMin->set(i, (m_pdu_data.dcritH[i])*COM_RATE_HUM);
+        m_packet->data->env->hum->crMin->set(i, (m_pdu_data.dcritH[i]));
 
         /*MY_DEBUG(1, GREEN) << "hunidity : " << i
                            << " down critical : " <<  m_pdu_data.dcritH[i]
@@ -1042,7 +1050,7 @@ int analyze_pdu_trap_data::get_total_max_voltage()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->vol->max->set(i, (m_pdu_data.maxTVol[i])*COM_RATE_VOL);
+        line->vol->max->set(i, (m_pdu_data.maxTVol[i]));
     }
 
     return 0;
@@ -1059,7 +1067,7 @@ int analyze_pdu_trap_data::get_total_min_voltage()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->vol->min->set(i, (m_pdu_data.minTVol[i])*COM_RATE_VOL);
+        line->vol->min->set(i, (m_pdu_data.minTVol[i]));
     }
 
     return 0;
@@ -1076,7 +1084,7 @@ int analyze_pdu_trap_data::get_total_up_critical_voltage()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->vol->crMax->set(i, (m_pdu_data.maxTVcrit[i])*COM_RATE_VOL);
+        line->vol->crMax->set(i, (m_pdu_data.maxTVcrit[i]));
     }
 
     return 0;
@@ -1093,7 +1101,7 @@ int analyze_pdu_trap_data::get_total_down_critical_voltage()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->vol->crMin->set(i, (m_pdu_data.minTVcrit[i])*COM_RATE_VOL);
+        line->vol->crMin->set(i, (m_pdu_data.minTVcrit[i]));
     }
 
     return 0;
@@ -1110,7 +1118,7 @@ int analyze_pdu_trap_data::get_total_electric_energy()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->ele->set(i, (m_pdu_data.Tkwh[i])*COM_RATE_ELE);
+        line->ele->set(i, (m_pdu_data.Tkwh[i]));
 
         /*MY_DEBUG(1, YELLOW) << "electric energy " << i
                             << " value : " << m_pdu_data.Tkwh[i]
@@ -1131,7 +1139,7 @@ int analyze_pdu_trap_data::get_pdu_power_factor()
     int i = 0;
     for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
     {
-        line->pf->set(i, (m_pdu_data.Tpowerfactor[i])*COM_RATE_PF);
+        line->pf->set(i, (m_pdu_data.Tpowerfactor[i]));
     }
 
     return 0;
@@ -1288,6 +1296,149 @@ int analyze_pdu_trap_data::get_pdu_output_name()
         output_name.assign(m_pdu_data.outputname[i], 32);
         //MY_DEBUG(1, RED) << "output name : " << output_name << DEBUG_END;
     }
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_total_warn_alarm_flag()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    uint8_t warnflag_tmp[42+8+12+4 +2+1+1 +2] = {0};
+    uint8_t alarmflag_tmp[42+8+12+4 +2] = {0};
+
+    if((0 != memcmp(warnflag_tmp, m_pdu_data.warnflag, 42+8+12+4 +2+1+1 +2)) ||
+       (0 != memcmp(alarmflag_tmp, m_pdu_data.alarmflag, 42+8+12+4 +2)))
+    {
+        m_packet->state = 1;
+    }
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_warn_alarm_flag()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    int i =0;
+    for(i = 0; i < ZPDU_OUTPUT_MAX_NUM; i++)
+    {
+        uint8_t alarm_falg = m_pdu_data.alarmflag[i];
+        uint8_t warn_falg = m_pdu_data.warnflag[i];
+
+        m_packet->data->output->cur->crAlarm->set(i, alarm_falg);
+        m_packet->data->output->cur->alarm->set(i, warn_falg);
+
+    }
+
+    PduObjData *line = m_packet->data->line;
+    for(i = 0; i < ZPDU_LINE_MAX_NUM; i++)
+    {
+        uint8_t alarm_falg = m_pdu_data.alarmflag[42+8+ 1+i];
+        uint8_t warn_falg = m_pdu_data.warnflag[42+8+ 1+i];
+
+        line->cur->crAlarm->set(i, alarm_falg);
+        line->cur->alarm->set(i, warn_falg);
+    }
+
+    for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
+    {
+        uint8_t alarm_falg = m_pdu_data.alarmflag[42+8+12 +1+i];
+        uint8_t warn_falg = m_pdu_data.warnflag[42+8+12 +1+i];
+
+        m_packet->data->env->tem->crAlarm->set(i, alarm_falg);
+        m_packet->data->env->tem->alarm->set(i, warn_falg);
+
+    }
+
+    for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
+    {
+        uint8_t alarm_falg = m_pdu_data.alarmflag[42+8+12+2 +1+i];
+        uint8_t warn_falg = m_pdu_data.warnflag[42+8+12+2 +1+i];
+
+        m_packet->data->env->hum->crAlarm->set(i, alarm_falg);
+        m_packet->data->env->hum->alarm->set(i, warn_falg);
+
+    }
+
+    for(i = 0; i < ZPDU_TEMP_SENSOR_MAX_NUM; i++)
+    {
+        uint8_t warn_falg = m_pdu_data.warnflag[42+8+12+4 +1+i];
+
+        m_packet->data->env->doorFlag->set(i, warn_falg);
+    }
+
+    uint8_t warn_falg_snoke = m_pdu_data.warnflag[42+8+12+4+2 +1];
+    m_packet->data->env->smokeFlag->set(0, warn_falg_snoke);
+
+    uint8_t warn_falg_water = m_pdu_data.warnflag[42+8+12+4+2+1 +1];
+    m_packet->data->env->waterFlag->set(0, warn_falg_water);
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_device_net_info()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    m_packet->net->ip->ip->ip->set(QString(QLatin1String(m_pdu_data.dev_ip)).remove(QString("\n")));
+    m_packet->net->ip->ip->mask->set(QString(QLatin1String(m_pdu_data.dev_mask)).remove(QString("\n")));
+    m_packet->net->ip->ip->gw->set(QString(QLatin1String(m_pdu_data.dev_gw)).remove(QString("\n")));
+    m_packet->net->ip->ip->dns->set(QString(QLatin1String(m_pdu_data.dev_dns)).remove(QString("\n")));
+    m_packet->net->ip->ip->mode = m_pdu_data.dhcp;
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_snmp_info()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    m_packet->net->snmp->get->set(QString(QLatin1String(m_pdu_data.snmp_local_permis)).remove(QString("\n")));
+    m_packet->net->snmp->set->set(QString(QLatin1String(m_pdu_data.snmp_net_permis)).remove(QString("\n")));
+    m_packet->net->snmp->trap1->set(QString(QLatin1String(m_pdu_data.snmp_trap_ip1)).remove(QString("\n")));
+    m_packet->net->snmp->trap2->set(QString(QLatin1String(m_pdu_data.snmp_trap_ip2)).remove(QString("\n")));
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_stmp_info()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    m_packet->net->smtp->usr->set(QString(QLatin1String(m_pdu_data.stmp_user)).remove(QString("\n")));
+    m_packet->net->smtp->pwd->set(QString(QLatin1String(m_pdu_data.stmp_pwd)).remove(QString("\n")));
+    m_packet->net->smtp->server->set(QString(QLatin1String(m_pdu_data.stmp_server)).remove(QString("\n")));
+    m_packet->net->smtp->test->set(QString(QLatin1String(m_pdu_data.stmp_email)).remove(QString("\n")));
+    m_packet->net->smtp->port = m_pdu_data.stmp_port;
+
+    return 0;
+}
+
+int analyze_pdu_trap_data::get_login_info()
+{
+    if(nullptr == m_packet)
+    {
+        return -1;
+    }
+
+    m_packet->usr->usrHash->setPwd(QString(QLatin1String(m_pdu_data.web_user)).remove(QString("\n")),
+                                   QString(QLatin1String(m_pdu_data.web_pwe)).remove(QString("\n")));
 
     return 0;
 }
