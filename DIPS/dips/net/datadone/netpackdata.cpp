@@ -9,14 +9,18 @@
 
 #ifdef ZEBRA_MODULE
 #include "zebra/zebra_client.h"
+
+#if defined(Q_OS_WIN32)
+#include <winsock2.h>
+#elif defined(Q_OS_LINUX)
+#include <netinet/in.h>
+#endif
 #endif
 
-#ifdef WIN32
-#include <winsock.h>
-#else
-#include<netinet/in.h>
-#endif
+<<<<<<< HEAD
 
+=======
+>>>>>>> lzy
 /**
  * 功  能：数据加入包头、结束符
  * 入口参数：pkt->包结构休

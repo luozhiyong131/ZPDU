@@ -68,19 +68,5 @@ void WebSocketClient::disconnected()
 void WebSocketClient::textMessageReceived(const QString &message)
 {
     SetPduThread::bulid()->addList(message);
-//    net_dev_data pkt;
-
-//    pkt.addr = 0;
-//    pkt.fn[0] = 7; // 设备用户信息
-//    pkt.fn[1] = 0x80; // SNMP
-//    pkt.fn[1] += 0;
-
-//    pkt.data = (uchar *)"lzy";
-//    pkt.len = 3;
-
-//    DevSetting::bulid()->sentData(pkt, "ZPDU"); //
-
-//    DevSetting::bulid()->sentData("192.168.1.55", pkt, "ZPDU");
-
 }
 
