@@ -90,9 +90,9 @@ void SetPduThread::run()
     isRun = true;
     while(isRun) {
         //----------[测试++]-----------
-        QByteArray array;
-        readFile(array);
-        addList(QString(array));
+//        QByteArray array;
+//        readFile(array);
+//        addList(QString(array));
         //----------------------------
         if(m_memoryList.size() > 0){
             lock.lockForRead(); //读锁
@@ -116,7 +116,6 @@ void SetPduThread::run()
 void SetPduThread::versionControl(QJsonObject &json)
 {
     //公司 -- 版本
-   // qDebug() << json.value("company").toString()<< json.value("version").toInt();
     int version = json.value("version").toInt();
     switch (version) {
     case 1: version1->versionV1_0(json); break; /* V1.0版本 */

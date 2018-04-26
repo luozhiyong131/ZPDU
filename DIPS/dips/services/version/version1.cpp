@@ -1,6 +1,6 @@
 #include "version1.h"
 
-#define ISDEBUG 1
+#define ISDEBUG 0
 
 Version1::Version1(QObject *parent) : QObject(parent)
 {
