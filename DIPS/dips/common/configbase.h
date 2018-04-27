@@ -25,6 +25,7 @@ public:
     int getUploadMode() { return mUploadMode; }
     int getDownMode() { return mDownMode; }
 
+protected:
     int getCmdSet(){ return mSetCmd; }
     void cmdSetClear();
 

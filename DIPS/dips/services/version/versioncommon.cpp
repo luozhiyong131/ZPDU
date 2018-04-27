@@ -3,7 +3,7 @@
 
 VersionCommon::VersionCommon(QObject *parent) : QObject(parent)
 {
-    //初始化配置文件
+
 }
 
 void VersionCommon::sentData(net_dev_data &pkt, HeadInfo &headInfo)

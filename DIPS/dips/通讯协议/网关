@@ -1,0 +1,41 @@
+通过查看分析代码，目前DIPS网关还具有一下问题：
+
+1、动环服务器下发指令到ZPDU时，没有zebra通道流程
+此问题前面已经提供给CLEVER相关调用接口，请及时修改。
+头文件：#include “zebra/zebra_client.h”
+接口：zebra_client::get_instance()->send_new_protocol_data(const QString channel_name, uchar *buff, int len);
+
+2、zebra security维护管理，此功能在zebra security manager和DIPS网关中都已经
+实现，但是在DIPS网关中，由于没有UI显示界面，所以提供如下接口，CLEVER方可获取所有数据
+按照自己设计实现可视化
+
+头文件：#include "zebra/signaldispatch.h"
+接口：void update_zebra_security_list_sig(std::map<QString, zebra_security_data> map_data);
+使用说明：
+①绑定SignalDispatch->get()对象的update_zebra_security_list_sig()信号
+②通过信号传输的数据std::map<QString, zebra_security_data> map_data，此数据中
+QString 为zebra security的MAC地址
+
+zebra_security_data为：
+typedef struct zebra_security_data_t
+{
+    int32_t beat_beriod;
+    QString dev_ip;
+}zebra_security_data;
+通过判断此结构体中的beat_beriod判断是否在线：若beat_beriod > 0则在线
+
+3、目前CLEVER未提供所有ZDPU地址列表，所以自动加好友目前实现在
+PduDataPacket *PduDevHash::get(int num)中，请CLEVER确认在此流程中
+添加自动加好友是否存在问题。
+
+
+另外提两个建议：
+①在开发Zebra Security Manager和DIPS网关的时候，请把ZEBRA_MODULE打开，在完整的
+DIPS项目上进行开发和测试工作，这样做有利于随时随地的发现DIPS系统的bug（不管是zebra
+还是TCP的），因为有些bug并不是那么明显出现，是偶然出现的，在完整的DIPS项目上进行
+开发和测试工作，对于DIPS项目的软件质量应该是有一定帮助的。
+
+②刘攀的DIPS项目测试，建议在电脑上安装一套完整的QT+VS环境，因为如果测试过程中，出现
+Zebra Security Manager和DIPS网关软件挂死的情况，如果没有QT+VS环境，就收集不到有效的
+bug相关信息，以至于不能定位出现此bug的原因。
+

@@ -6,10 +6,7 @@
  *      Author: Lzy
  */
 #include "common.h"
-
 #include <time.h>
-
-
 
 /***
   * 获取程序数据目录
@@ -19,7 +16,7 @@ QString cm_pathOfData(const QString& name)
     QDir dataDir(QDir::home());
     QString dirName = ".CleverDIPS";
     if(!dataDir.exists(dirName))
-        dataDir.mkdir(dirName);
+        dataDir.mkdir(dirName); //不存在 就创建
     dataDir.cd(dirName);
     return dataDir.absoluteFilePath(name);
 }

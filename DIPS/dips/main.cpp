@@ -5,6 +5,7 @@
 #include "zebra/common_debug.h"
 #include "zebra/zebra_client.h"
 #include "autoaddfriend/auto_get_zebra_server_ip.h"
+#include "web/web.h"
 
 
 void initFunction()
@@ -17,6 +18,11 @@ void initFunction()
     MY_DEBUG(1, LIGHT_PURPLE) << "hello zebra" << DEBUG_END;
     zebra_client::get_instance()->init();
     AutoGetServer::get_instance();
+#endif
+
+#ifdef WEB_MODULE
+    qDebug() << "[Web]_ hello web";
+    WEB::getInstance();
 #endif
 }
 

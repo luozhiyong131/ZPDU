@@ -21,6 +21,7 @@ include(common/common.pri)
 include(services/services.pri)
 include(zebra/zebra.pri)
 include(autoaddfriend/autoaddfriend.pri)
+include(web/web.pri)
 
 SOURCES += main.cpp
 
@@ -39,4 +40,4 @@ HEADERS +=
 
 
 DEFINES += ZEBRA_MODULE
-
+#DEFINES += WEB_MODULE
