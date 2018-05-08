@@ -9,7 +9,7 @@
 #include "devmanage/pdudevmanage.h"
 #include "chart/pdudevchart.h"
 
-#define PDU_OFF_LINE_TIME   7 // PDU离线时间
+#define PDU_OFF_LINE_TIME   10 // PDU离线时间
 
 class PduDataPacket
 {
