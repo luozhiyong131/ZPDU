@@ -84,7 +84,7 @@ void PduDevSpied::checkDevState(void)
                 PduDataPacket *data = devHash->getPacket(devList.at(k)); // 获取设备数据
                 if(data->offLine > 0)  // 必须在线才进行检查
                 {
-                    data->offLine -= 2; // 标志位减少
+                    data->offLine -= 1; // 标志位减少
                     if(data->offLine>0)
                     {
                         lineNum++; // 在线设备数量加一
@@ -123,10 +123,16 @@ void PduDevSpied::checkDevState(void)
     gPduDevNum->alarm = alarmNum;
     gPduDevNum->off = offNum;
 
+<<<<<<< HEAD
     qDebug() << "num:" <<num
              << "lineNum:" <<lineNum
              << "alarmNum:" <<alarmNum
              << "offNum:" << offNum;
+=======
+    qDebug() << "Num:" << num
+             << "   lineNum:" << lineNum
+             << "   OffNum:" << offNum;
+>>>>>>> d7a92b7575a91aee58b152bdf5f2de1172101d88
 }
 
 
