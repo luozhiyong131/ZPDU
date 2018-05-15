@@ -123,16 +123,10 @@ void PduDevSpied::checkDevState(void)
     gPduDevNum->alarm = alarmNum;
     gPduDevNum->off = offNum;
 
-<<<<<<< HEAD
     qDebug() << "num:" <<num
              << "lineNum:" <<lineNum
              << "alarmNum:" <<alarmNum
              << "offNum:" << offNum;
-=======
-    qDebug() << "Num:" << num
-             << "   lineNum:" << lineNum
-             << "   OffNum:" << offNum;
->>>>>>> d7a92b7575a91aee58b152bdf5f2de1172101d88
 }
 
 
