@@ -110,8 +110,6 @@ static void pdu_hashData_function(PduDataPacket *dev,pdu_dev_data *data)
     }
 }
 
-
-
 /**
  * @brief Hash数据保存的入口函数
  *  主要是针对代号段的处理，pdu_dev_code
@@ -147,7 +145,6 @@ void pdu_hashData_save(pdu_devData_packet *packet)
                     dev->info->addr->group->set("PDU"); // 默认分组
                     // dl_save_add(packet->ip);
                 }
-
                 pdu_hashData_function(dev, packet->data); //功能预处理
             }
             else
