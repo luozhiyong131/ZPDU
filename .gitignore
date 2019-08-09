@@ -46,3 +46,4 @@ DIPS/dips/zebra/lib/x32/release/peersafe/protoc.exe
 DIPS/dips/zebra/lib/x32/debug/peersafe/copylib.bat
 *.rar
 *.tar.gz
+*.tar
