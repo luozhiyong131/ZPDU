@@ -32,11 +32,11 @@ void WebSocketClient::readFile()
     }
 
     QString port = sys_configFile_readStr("port", WEB_SOCKET);
-    if(url.isEmpty()) {
+    if(port.isEmpty()) {
         port = "1234";
         sys_configFile_writeParam("port", "1234", WEB_SOCKET);
     }
-    m_url = "http://" + url +":" + port;
+    m_url = "ws://" + url +":" + port;
     open(m_url);
 }
 
