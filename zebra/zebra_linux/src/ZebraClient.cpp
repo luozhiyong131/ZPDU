@@ -17,27 +17,13 @@ Zebra_Client::~Zebra_Client()
 }
 
 
-void Zebra_Client::key_pair(std::string& public_key, std::string& private_key)
-{
-	Zebra_sNodeItem *item = mCfg->findNode(mBootstrapNodes);
-	if(item) {
-		public_key = item->public_key;
-		private_key = item->private_key;
-	} else {
-		cout << "zebra read node key fail." << endl;
-	}
-}
-
-
 void Zebra_Client::handleBootstrapEvent(bootstrapEvent *evn)
 {
-	mBootstrapNodes = evn->node_id();
-
-	Zebra_sNodeItem item;
-	item.node_id = evn->node_id();
-	item.public_key = evn->key().Publick;
-	item.private_key = evn->key().Private;
-	mCfg->updateNode(item);
+	mNodeId =  evn->node_id().c_str();
+	if(mNodeId.size()) {
+		mCfg->node_id = mNodeId;
+	}
+//	cout << "boot node : " << mNodeId.c_str() << endl;
 }
 
 
@@ -52,25 +38,8 @@ void Zebra_Client::handleCreateChannelEvent(channelEvent* evn)
 	channel ch =  evn->getChannel();
 	if(CH_CHAT == ch.type())
 	{
-		Zebra_sChItem *item = mCfg->getChannel();
-
-		item->channel_id = ch.channel_id();
-		item->ch_owner_id = ch.owner().id;
-		item->type = ch.type();
-		item->expire =ch.expire();
-
-		item->public_key = ch.key().Publick;
-		item->private_key = ch.key().Private;
-		item->secret = ch.secret();
-
-		item->f_node_id = ch.from().id;
-		item->f_pubkey = ch.from().pubkey;
-		item->f_privatekey = ch.from().privatekey;
-
-		item->t_node_id = ch.to().id;
-		item->t_pubkey = ch.to().pubkey;
-		item->t_privatekey = ch.to().privatekey;
-		mCfg->saveChannel();
+		mCfg->channel_id = ch.channel_id().c_str();
+		cout << "zebra Create Channel id:  " << mCfg->channel_id << endl;
 	}
 }
 
@@ -89,8 +58,9 @@ void Zebra_Client::handleConnectPeerEvent(connectEvent* evn)
 
 void Zebra_Client::handleJoinChannelEvent(joinEvent* evn)
 {
-	// evn->reason("welcome to here");
+	evn->reason("welcome to here");
 	evn->allow(true);
+	cout << "join allow " << evn->channel().c_str() << endl;
 }
 
 
@@ -103,7 +73,7 @@ void Zebra_Client::handleAllowEvent(allowEvent* evn)
 void Zebra_Client::handleDisAllowEvent(disAllowEvent* evn)
 {
 	string join_id = evn->join_channel();
-	//    mZebraData->setJoinFailed(join_id);
+	cout << "join dis allow " << join_id << endl;
 }
 
 void Zebra_Client::handleMessageEvent(messageEvent* evn)
@@ -117,6 +87,7 @@ void Zebra_Client::handleMessageEvent(messageEvent* evn)
 	int len = data.length();
 	memcpy(rcv, data.c_str(), len);
 
+	cout <<"recv: " << rcv << endl;
 }
 
 
@@ -140,29 +111,6 @@ void Zebra_Client::handleNotifyEvent(notifyEvent* evn)
 
 void Zebra_Client::handleLoadChEvent(localChannel* evn)
 {
-	Zebra_sChItem *item = mCfg->getChannel();
-	if(item->channel_id.size()) {
-		channel::audience_type from;
-		from.id = item->f_node_id;
-		from.pubkey = item->f_pubkey;
-		from.privatekey = item->f_privatekey;
-
-		channel::audience_type to;
-		to.id = item->t_node_id;
-		to.pubkey = item->t_pubkey;
-		to.privatekey = item->t_privatekey;
-
-		channel::Keypair key;
-		key.Private = item->private_key;
-		key.Publick = item->public_key;
-
-		channel::Owner own;
-		own.id = item->ch_owner_id;
-		own.keys = key;
-
-		channel ch(item->type, item->expire, item->channel_id, key, own, item->secret, from, to);
-		evn->add(ch);
-	}
 }
 
 

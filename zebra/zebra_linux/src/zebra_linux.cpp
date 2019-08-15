@@ -6,14 +6,19 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
-#include "ZebraUdpThread.h"
+#include "ZebraPeer.h"
 
 int main()
 {
-	zebra_udp_thread();
+	Zebra_Peer *peer = Zebra_Peer::bulid();
+	int i=0; char buf[64] = {0};
+
 	while(1) {
-		cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-		sleep(1);
+		sprintf(buf, "Hello World %d", i++);
+		peer->send((uchar *)buf, strlen(buf));
+
+//		cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+		sleep(5);
 	}
 	return 0; //
 }

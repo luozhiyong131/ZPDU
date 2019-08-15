@@ -16,6 +16,7 @@ public:
 	virtual ~Zebra_Im();
 	static Zebra_Im *bulid();
 
+	void rebootZebra();
 	bool startZebra();
 	void stopZebra();
 	int send(const string &id, uchar *buf, int len);

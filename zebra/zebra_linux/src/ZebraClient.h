@@ -20,12 +20,12 @@ public:
 	Zebra_Client();
 	virtual ~Zebra_Client();
 
-protected:
-    uint defaultPort() {return 37053;}
     void setBootstrapNodes(const string& nodes) { mBootstrapNodes = nodes;}
+protected:
+    uint defaultPort() {return 37051;}
 
     void node_id(string& id) {id = mNodeId;}
-    void key_pair(string& public_key, string& private_key);
+    void key_pair(string& public_key, string& private_key){}
     bool readOnly() const {return true;}
 
     // nodes eg: 10.100.0.100:37053;10.100.0.101:37053
